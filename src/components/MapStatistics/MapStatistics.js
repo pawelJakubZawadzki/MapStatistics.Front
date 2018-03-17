@@ -1,13 +1,44 @@
 import React from 'react';
-import Map from './Map';
+import { themr } from 'react-css-themr';
+import PropTypes from 'prop-types';
+import AppBar from 'react-toolbox/lib/app_bar';
+import Map from '../Map';
+import StatisticsManagament from '../StatisticsManagament';
+import StatisticsList from '../StatisticsList';
+import StatisticsWindow from '../StatisticsWindow';
+import { COMPONENTS, GOOGLE_MAPS_API_URL } from '../../constants';
 
-const MapStatistics = () => (
-  <Map
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    loadingElement={<div style={{ height: '100%' }} />}
-    containerElement={<div style={{ height: '400px' }} />}
-    mapElement={<div style={{ height: '100%' }} />}
-  />
-);
+const MapStatistics = ({ theme }) => {
+  const loadingElement = <div className={theme.loadingElement} />;
+  const containerElement = <div className={theme.containerElement} />;
+  const mapElement = (
+    <div
+      className={theme.mapElement}
+    />
+  );
 
-export default MapStatistics;
+  return (
+    <div className={theme.layout}>
+      <AppBar title="Statistics Map" />
+      <StatisticsManagament />
+      <StatisticsWindow />
+      <div className={theme.mapAreasContainer}>
+        <Map
+          googleMapURL={GOOGLE_MAPS_API_URL}
+          loadingElement={loadingElement}
+          containerElement={containerElement}
+          mapElement={mapElement}
+        />
+        <div className={theme.areaList}>
+          <StatisticsList />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+MapStatistics.propTypes = {
+  theme: PropTypes.object.isRequired
+};
+
+export default themr(COMPONENTS.MAP_STATISTICS)(MapStatistics);

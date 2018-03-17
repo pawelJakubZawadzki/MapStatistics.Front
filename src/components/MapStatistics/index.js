@@ -1,3 +1,4 @@
 import MapStatistics from './MapStatistics';
+import connectContainer from './MapStatisticsContainer';
 
-export default MapStatistics;
+export default connectContainer(MapStatistics);
