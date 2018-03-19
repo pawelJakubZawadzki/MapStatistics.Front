@@ -4,12 +4,12 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 import { ThemeProvider } from 'react-css-themr';
 import { document } from 'global/window';
+import axios from 'axios';
+import { API_URL } from './constants';
 import MapStatistics from './components/MapStatistics';
 import reducers from './modules';
-import { API_URL } from './constants';
 import theme from './themes';
 
 const api = axios.create({

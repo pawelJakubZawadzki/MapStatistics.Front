@@ -57,7 +57,7 @@ class StatisticsManagament extends Component {
     const statisticsDataRequest = {
       indicatorId: selectedIndicator,
       year: selectedYear,
-      countriesIds: areas.map(area => area.contryCode)
+      countriesIds: areas.map(area => area.countryCode)
     };
 
     setStatisticsWindowVisibility(true);
