@@ -21,11 +21,13 @@ export const selectMap = state => state.map.map;
 
 export const selectZoom = state => state.map.zoom;
 
+export const selectIsStatisticsLackPopupVisible = state => state.map.isStatisticsLackPopupVisible;
+
 export const selectAreaStatistics = createSelector(
   selectStatistics,
   selectAreas,
   (statistics, areas) => {
-    if (isEmpty(areas)) {
+    if (isEmpty(areas) || isEmpty(statistics)) {
       return [];
     }
 
@@ -34,6 +36,12 @@ export const selectAreaStatistics = createSelector(
       code: statisticsItem.countryCode,
       name: areas.find(area => area.countryCode === statisticsItem.countryCode).name
     }));
+
+    const parsedString = parseFloat(areaStatistics[0].statisticsValue);
+
+    if (!Number.isNaN(parsedString)) {
+      return orderBy(areaStatistics, area => parseFloat(area.statisticsValue), 'desc');
+    }
 
     return orderBy(areaStatistics, area => area.statisticsValue, 'desc');
   },

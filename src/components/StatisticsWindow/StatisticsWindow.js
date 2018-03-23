@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import { themr } from 'react-css-themr';
 import { COMPONENTS } from '../../constants';
+import { YEAR_HEADER } from './constants';
 
 const StatisticsWindow = (props) => {
   const {
@@ -13,7 +14,8 @@ const StatisticsWindow = (props) => {
     setStatisticsWindowVisibility,
     isStatisticsWindowVisible,
     setZoom,
-    map
+    map,
+    isStatisticsLackPopupVisible
   } = props;
 
   const handleMapClick = () => {
@@ -21,7 +23,7 @@ const StatisticsWindow = (props) => {
     setStatisticsWindowVisibility(false);
   };
 
-  if (isEmpty(areaStatistics) || !isStatisticsWindowVisible) {
+  if (isEmpty(areaStatistics) || !isStatisticsWindowVisible || isStatisticsLackPopupVisible) {
     return null;
   }
 
@@ -31,13 +33,23 @@ const StatisticsWindow = (props) => {
         title={areaStatistics.name}
       />
       <CardText>
+        {areaStatistics.indicatorName}:
+      </CardText>
+      <CardText>
         {areaStatistics.value}
-        {areaStatistics.indicatorName}
+      </CardText>
+      <CardText>
+        {YEAR_HEADER}
+      </CardText>
+      <CardText>
         {areaStatistics.year}
       </CardText>
       <Button
         label="ok"
         onClick={handleMapClick}
+        raised
+        primary
+        className={theme.closeButton}
       />
     </Card>
   );
@@ -55,7 +67,8 @@ StatisticsWindow.propTypes = {
   isStatisticsWindowVisible: PropTypes.bool.isRequired,
   setStatisticsWindowVisibility: PropTypes.func.isRequired,
   map: PropTypes.object,
-  setZoom: PropTypes.func.isRequired
+  setZoom: PropTypes.func.isRequired,
+  isStatisticsLackPopupVisible: PropTypes.bool.isRequired
 };
 
 export default themr(COMPONENTS.STATISTICS_WINDOW)(StatisticsWindow);

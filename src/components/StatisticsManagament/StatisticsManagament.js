@@ -5,6 +5,13 @@ import { Button } from 'react-toolbox/lib/button';
 import { themr } from 'react-css-themr';
 import isEmpty from 'lodash/isEmpty';
 import { COMPONENTS } from '../../constants';
+import {
+  INDICATOR_LABEL,
+  YEAR_LABEL,
+  BUTTON_LABEL,
+  INITIAL_INDICATOR_INDEX,
+  INITIAL_YEAR_INDEX
+} from './constants';
 
 class StatisticsManagament extends Component {
   state = {
@@ -30,15 +37,31 @@ class StatisticsManagament extends Component {
     }
   }
 
-  componentWillReceiveProps({ indicators, years }) {
+  componentWillReceiveProps({
+    indicators, years, areas, setStatisticsWindowVisibility, fetchStatistics
+  }) {
     const { indicators: oldIndicators, years: oldYears } = this.props;
 
-    if (isEmpty(oldIndicators) && !isEmpty(indicators)) {
-      this.setState({ selectedIndicator: indicators[0].code });
+    const shouldSetInitialIndicator = isEmpty(oldIndicators) && !isEmpty(indicators);
+    if (shouldSetInitialIndicator) {
+      this.setState({ selectedIndicator: indicators[INITIAL_INDICATOR_INDEX].code });
     }
 
-    if (isEmpty(oldYears) && !isEmpty(years)) {
-      this.setState({ selectedYear: years[0] });
+    const shouldSetInitialYear = isEmpty(oldYears) && !isEmpty(years);
+    if (shouldSetInitialYear) {
+      this.setState({ selectedYear: years[INITIAL_YEAR_INDEX] });
+    }
+
+    const shouldFetchStatistics = !isEmpty(indicators) && !isEmpty(years) && !isEmpty(areas);
+    if (shouldFetchStatistics) {
+      const statisticsDataRequest = {
+        indicatorId: indicators[INITIAL_INDICATOR_INDEX].code,
+        year: years[INITIAL_YEAR_INDEX],
+        countriesIds: areas.map(area => area.countryCode)
+      };
+
+      setStatisticsWindowVisibility(true);
+      fetchStatistics(statisticsDataRequest);
     }
   }
 
@@ -51,7 +74,9 @@ class StatisticsManagament extends Component {
   };
 
   handleSubmitButtonClick = () => {
-    const { fetchStatistics, areas, setStatisticsWindowVisibility } = this.props;
+    const {
+      fetchStatistics, areas, setStatisticsWindowVisibility, selectArea
+    } = this.props;
     const { selectedIndicator, selectedYear } = this.state;
 
     const statisticsDataRequest = {
@@ -61,6 +86,7 @@ class StatisticsManagament extends Component {
     };
 
     setStatisticsWindowVisibility(true);
+    selectArea(null);
     fetchStatistics(statisticsDataRequest);
   }
 
@@ -80,6 +106,7 @@ class StatisticsManagament extends Component {
           value={this.state.selectedIndicator}
           onChange={this.handleIndicatorChange}
           className={theme.indicatorDropdown}
+          label={INDICATOR_LABEL}
         />
         <Dropdown
           auto
@@ -87,10 +114,12 @@ class StatisticsManagament extends Component {
           value={this.state.selectedYear}
           onChange={this.handleYearChange}
           className={theme.yearDropdown}
+          label={YEAR_LABEL}
         />
         <Button
-          label="Show Statistics"
+          label={BUTTON_LABEL}
           raised
+          primary
           onClick={this.handleSubmitButtonClick}
           className={theme.submitButton}
         />
@@ -115,7 +144,8 @@ StatisticsManagament.propTypes = {
     geoJson: PropTypes.string.isRequired
   })),
   theme: PropTypes.object.isRequired,
-  setStatisticsWindowVisibility: PropTypes.func.isRequired
+  setStatisticsWindowVisibility: PropTypes.func.isRequired,
+  selectArea: PropTypes.func.isRequired
 };
 
 export default themr(COMPONENTS.STATISTICS_MANAGAMENT)(StatisticsManagament);

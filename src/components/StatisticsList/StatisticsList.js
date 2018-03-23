@@ -11,7 +11,7 @@ class StatisticsList extends Component {
   };
 
   componentWillReceiveProps({ areaStatistics, selectArea }) {
-    if (!isEmpty(areaStatistics) && isEmpty(this.state.selectedAreas)) {
+    if (!isEmpty(areaStatistics)) {
       const initialValues = areaStatistics.map(area => ({
         code: area.code,
         isSelected: false

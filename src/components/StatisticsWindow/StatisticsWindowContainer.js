@@ -5,7 +5,8 @@ import {
   setStatisticsWindowVisibility,
   selectIsStatisticsWindowVisible,
   setZoom,
-  selectMap
+  selectMap,
+  selectIsStatisticsLackPopupVisible
 } from '../../modules/Map';
 
 const mapDispatchToProps = {
@@ -16,7 +17,8 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   areaStatistics: selectSelectedAreaStatistics(state),
   isStatisticsWindowVisible: selectIsStatisticsWindowVisible(state),
-  map: selectMap(state)
+  map: selectMap(state),
+  isStatisticsLackPopupVisible: selectIsStatisticsLackPopupVisible(state)
 });
 
 

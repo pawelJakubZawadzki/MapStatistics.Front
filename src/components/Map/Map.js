@@ -21,10 +21,12 @@ class Map extends Component {
   }
 
   handleMapClick = () => {
-    const { setZoom, setStatisticsWindowVisibility } = this.props;
+    const { setZoom, setStatisticsWindowVisibility, isStatisticsWindowVisible } = this.props;
 
-    setZoom(this.state.map.getZoom() - 1);
-    setStatisticsWindowVisibility(false);
+    if (isStatisticsWindowVisible) {
+      setZoom(this.state.map.getZoom() - 1);
+      setStatisticsWindowVisibility(false);
+    }
   };
 
   render() {
@@ -49,7 +51,8 @@ Map.propTypes = {
   zoom: PropTypes.number,
   setMap: PropTypes.func.isRequired,
   setZoom: PropTypes.func.isRequired,
-  setStatisticsWindowVisibility: PropTypes.func.isRequired
+  setStatisticsWindowVisibility: PropTypes.func.isRequired,
+  isStatisticsWindowVisible: PropTypes.bool.isRequired
 };
 
 Map.defaultProps = {

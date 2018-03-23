@@ -6,7 +6,8 @@ export {
   selectArea,
   setStatisticsWindowVisibility,
   setMap,
-  setZoom
+  setZoom,
+  hideStatisticsLackPopup
 } from './actions';
 
 export {
@@ -18,5 +19,6 @@ export {
   selectSelectedAreaStatistics,
   selectIsStatisticsWindowVisible,
   selectMap,
-  selectZoom
+  selectZoom,
+  selectIsStatisticsLackPopupVisible
 } from './selectors';

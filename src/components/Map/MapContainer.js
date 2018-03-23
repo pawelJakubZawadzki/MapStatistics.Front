@@ -1,5 +1,11 @@
 import { connect } from 'react-redux';
-import { selectZoom, setMap, setZoom, setStatisticsWindowVisibility } from '../../modules/Map';
+import {
+  selectZoom,
+  setMap,
+  setZoom,
+  setStatisticsWindowVisibility,
+  selectIsStatisticsWindowVisible
+} from '../../modules/Map';
 
 const mapDispatchToProps = {
   setMap,
@@ -8,7 +14,8 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  zoom: selectZoom(state)
+  zoom: selectZoom(state),
+  isStatisticsWindowVisible: selectIsStatisticsWindowVisible(state)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

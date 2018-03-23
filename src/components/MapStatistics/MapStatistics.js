@@ -6,6 +6,7 @@ import Map from '../Map';
 import StatisticsManagament from '../StatisticsManagament';
 import StatisticsList from '../StatisticsList';
 import StatisticsWindow from '../StatisticsWindow';
+import StatisticsLackPopup from '../StatisticsLackPopup';
 import { COMPONENTS, GOOGLE_MAPS_API_URL } from '../../constants';
 
 const MapStatistics = ({ theme }) => {
@@ -22,6 +23,7 @@ const MapStatistics = ({ theme }) => {
       <AppBar title="Statistics Map" />
       <StatisticsManagament />
       <StatisticsWindow />
+      <StatisticsLackPopup />
       <div className={theme.mapAreasContainer}>
         <Map
           googleMapURL={GOOGLE_MAPS_API_URL}

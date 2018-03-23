@@ -67,3 +67,9 @@ export const setZoom = zoom => async (dispatch) => {
     payload: zoom
   });
 };
+
+export const hideStatisticsLackPopup = () => async (dispatch) => {
+  dispatch({
+    type: ACTION_TYPES.HIDE_STATISTICS_LACK_POPUP
+  });
+};

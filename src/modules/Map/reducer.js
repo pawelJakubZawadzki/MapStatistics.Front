@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { ACTION_TYPES } from './constants';
 
 const initialState = {
@@ -8,7 +9,8 @@ const initialState = {
   selectedArea: null,
   selectedYear: null,
   selectedIndicator: null,
-  isStatisticsWindowVisible: false
+  isStatisticsWindowVisible: false,
+  isStatisticsLackPopupVisible: false
 };
 
 export default function map(state = initialState, action) {
@@ -20,6 +22,13 @@ export default function map(state = initialState, action) {
       };
     }
     case ACTION_TYPES.STATISTCS_FETCHED: {
+      if (isEmpty(action.payload.statistics)) {
+        return {
+          ...state,
+          isStatisticsLackPopupVisible: true
+        };
+      }
+
       return {
         ...state,
         statistics: action.payload.statistics,
@@ -61,6 +70,12 @@ export default function map(state = initialState, action) {
       return {
         ...state,
         zoom: action.payload
+      };
+    }
+    case ACTION_TYPES.HIDE_STATISTICS_LACK_POPUP: {
+      return {
+        ...state,
+        isStatisticsLackPopupVisible: false
       };
     }
 
