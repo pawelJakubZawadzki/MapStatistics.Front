@@ -8,12 +8,12 @@ const config = {
     'react-hot-loader/patch',
     './src/index'
   ],
-  devServer: {
-    host: 'localhost',
-    port: 3000,
-    contentBase: './public',
-    historyApiFallback: true
-  },
+  // devServer: {
+  //   host: 'localhost',
+  //   port: 3000,
+  //   contentBase: './public',
+  //   historyApiFallback: true
+  // },
   output: {
     path: path.resolve('./dist'),
     filename: 'app.js',

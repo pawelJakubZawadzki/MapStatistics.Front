@@ -14,11 +14,6 @@ const config = {
     contentBase: './public',
     historyApiFallback: true
   },
-  output: {
-    path: path.resolve('./dist'),
-    filename: 'app.js',
-    publicPath: '/'
-  },
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     modules: [
