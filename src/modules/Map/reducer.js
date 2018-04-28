@@ -10,7 +10,8 @@ const initialState = {
   selectedYear: null,
   selectedIndicator: null,
   isStatisticsWindowVisible: false,
-  isStatisticsLackPopupVisible: false
+  isStatisticsLackPopupVisible: false,
+  isLoaderVisible: true
 };
 
 export default function map(state = initialState, action) {
@@ -25,7 +26,8 @@ export default function map(state = initialState, action) {
       if (isEmpty(action.payload.statistics)) {
         return {
           ...state,
-          isStatisticsLackPopupVisible: true
+          isStatisticsLackPopupVisible: true,
+          isLoaderVisible: false
         };
       }
 
@@ -33,7 +35,8 @@ export default function map(state = initialState, action) {
         ...state,
         statistics: action.payload.statistics,
         selectedYear: action.payload.year,
-        selectedIndicator: action.payload.indicator
+        selectedIndicator: action.payload.indicator,
+        isLoaderVisible: false
       };
     }
     case ACTION_TYPES.INDICATORS_FETCHED: {
@@ -76,6 +79,12 @@ export default function map(state = initialState, action) {
       return {
         ...state,
         isStatisticsLackPopupVisible: false
+      };
+    }
+    case ACTION_TYPES.SHOW_LOADER: {
+      return {
+        ...state,
+        isLoaderVisible: true
       };
     }
 

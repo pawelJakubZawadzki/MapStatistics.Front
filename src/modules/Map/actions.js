@@ -73,3 +73,9 @@ export const hideStatisticsLackPopup = () => async (dispatch) => {
     type: ACTION_TYPES.HIDE_STATISTICS_LACK_POPUP
   });
 };
+
+export const showLoader = () => async (dispatch) => {
+  dispatch({
+    type: ACTION_TYPES.SHOW_LOADER
+  });
+};
