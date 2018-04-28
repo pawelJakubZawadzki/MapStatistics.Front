@@ -3,7 +3,8 @@ export const COMPONENTS = {
   STATISTICS_WINDOW: 'StatisticsWindow',
   STATISTICS_MANAGAMENT: 'StatisticsManagament',
   MAP_STATISTICS: 'MapStatistics',
-  STATISTICS_LACK_POPUP: 'StatisticsLackPopup'
+  STATISTICS_LACK_POPUP: 'StatisticsLackPopup',
+  LOADER: 'Loader'
 };
 
 export const API_URL = 'https://mapstatisticsapi.azurewebsites.net/api/';

@@ -7,6 +7,7 @@ import StatisticsManagament from '../StatisticsManagament';
 import StatisticsList from '../StatisticsList';
 import StatisticsWindow from '../StatisticsWindow';
 import StatisticsLackPopup from '../StatisticsLackPopup';
+import Loader from '../Loader';
 import { COMPONENTS, GOOGLE_MAPS_API_URL } from '../../constants';
 
 const MapStatistics = ({ theme }) => {
@@ -35,6 +36,7 @@ const MapStatistics = ({ theme }) => {
           <StatisticsList />
         </div>
       </div>
+      <Loader />
     </div>
   );
 };

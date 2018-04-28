@@ -38,7 +38,7 @@ class StatisticsManagament extends Component {
   }
 
   componentWillReceiveProps({
-    indicators, years, areas, setStatisticsWindowVisibility, fetchStatistics
+    indicators, years, areas, setStatisticsWindowVisibility, fetchStatistics, showLoader
   }) {
     const { indicators: oldIndicators, years: oldYears } = this.props;
 
@@ -62,6 +62,7 @@ class StatisticsManagament extends Component {
 
       setStatisticsWindowVisibility(true);
       fetchStatistics(statisticsDataRequest);
+      showLoader();
     }
   }
 
@@ -75,7 +76,7 @@ class StatisticsManagament extends Component {
 
   handleSubmitButtonClick = () => {
     const {
-      fetchStatistics, areas, setStatisticsWindowVisibility, selectArea
+      fetchStatistics, areas, setStatisticsWindowVisibility, selectArea, showLoader
     } = this.props;
     const { selectedIndicator, selectedYear } = this.state;
 
@@ -88,6 +89,7 @@ class StatisticsManagament extends Component {
     setStatisticsWindowVisibility(true);
     selectArea(null);
     fetchStatistics(statisticsDataRequest);
+    showLoader();
   }
 
   render() {
@@ -145,7 +147,8 @@ StatisticsManagament.propTypes = {
   })),
   theme: PropTypes.object.isRequired,
   setStatisticsWindowVisibility: PropTypes.func.isRequired,
-  selectArea: PropTypes.func.isRequired
+  selectArea: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired
 };
 
 export default themr(COMPONENTS.STATISTICS_MANAGAMENT)(StatisticsManagament);

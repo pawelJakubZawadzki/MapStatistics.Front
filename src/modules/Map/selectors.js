@@ -23,6 +23,8 @@ export const selectZoom = state => state.map.zoom;
 
 export const selectIsStatisticsLackPopupVisible = state => state.map.isStatisticsLackPopupVisible;
 
+export const selectIsLoaderVisible = state => state.map.isLoaderVisible;
+
 export const selectAreaStatistics = createSelector(
   selectStatistics,
   selectAreas,

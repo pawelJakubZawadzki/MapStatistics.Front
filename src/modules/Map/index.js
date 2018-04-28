@@ -7,7 +7,8 @@ export {
   setStatisticsWindowVisibility,
   setMap,
   setZoom,
-  hideStatisticsLackPopup
+  hideStatisticsLackPopup,
+  showLoader
 } from './actions';
 
 export {
@@ -20,5 +21,6 @@ export {
   selectIsStatisticsWindowVisible,
   selectMap,
   selectZoom,
-  selectIsStatisticsLackPopupVisible
+  selectIsStatisticsLackPopupVisible,
+  selectIsLoaderVisible
 } from './selectors';

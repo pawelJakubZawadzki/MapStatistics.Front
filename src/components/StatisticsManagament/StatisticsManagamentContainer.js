@@ -9,7 +9,8 @@ import {
   fetchAreas,
   selectAreas,
   setStatisticsWindowVisibility,
-  selectArea
+  selectArea,
+  showLoader
 } from '../../modules/Map';
 
 const mapDispatchToProps = {
@@ -18,7 +19,8 @@ const mapDispatchToProps = {
   fetchStatistics,
   fetchAreas,
   setStatisticsWindowVisibility,
-  selectArea
+  selectArea,
+  showLoader
 };
 
 const mapStateToProps = state => ({
